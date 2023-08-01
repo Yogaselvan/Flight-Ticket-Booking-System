@@ -26,11 +26,14 @@ public class ServiceService {
 
  public ServiceService() {
      try {
+    	 Class.forName("com.mysql.cj.jdbc.Driver");
          connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
      } catch (SQLException e) {
          e.printStackTrace();
+     } catch (ClassNotFoundException e) {
+		e.printStackTrace();
      }
- }
+ 
 
  public void add(Service service) {
      String query = "INSERT INTO " + SERVICE_TABLE + " (" + COLUMN_FUEL_TYPE + ", " + COLUMN_FUEL_AMOUNT + ", " +
