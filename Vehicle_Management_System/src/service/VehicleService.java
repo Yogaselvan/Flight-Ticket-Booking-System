@@ -22,11 +22,14 @@ public class VehicleService {
 
  public VehicleService() {
      try {
+    	 Class.forName("com.mysql.cj.jdbc.Driver");
          connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
      } catch (SQLException e) {
          e.printStackTrace();
+     } catch (ClassNotFoundException e) {
+		e.printStackTrace();
      }
- }
+ 
  public void delete(int id) {
      String query = "DELETE FROM " + VEHICLE_TABLE + " WHERE " + COLUMN_ID + " = ?";
      try (PreparedStatement pstmt = connection.prepareStatement(query)) {
