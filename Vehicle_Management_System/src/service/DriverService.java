@@ -23,13 +23,16 @@ public class DriverService {
 
 	    private Connection connection;
 
-	    public DriverService() {
+	   	    public DriverService() {
 	        try {
+	        	 Class.forName("com.mysql.cj.jdbc.Driver");
 	            connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
 	        } catch (SQLException e) {
 	            e.printStackTrace();
-	        }
-	    }
+	        } catch (ClassNotFoundException e) {
+				e.printStackTrace();
+		}
+	    
 
 	    public void add(Driver driver) {
 	        String query = "INSERT INTO " + DRIVER_TABLE + " (" + COLUMN_ID + ", " + COLUMN_NAME + ", " +
